@@ -45,6 +45,7 @@ class ImagesController: UIViewController {
     dropdownController.didMove(toParentViewController: self)
 
     gridView.bottomView.addSubview(stackView)
+    gridView.topView.backgroundColor = UIColor.black
 
     gridView.g_pinEdges()
 
