@@ -55,6 +55,9 @@ class VideosController: UIViewController {
 
     gridView.closeButton.addTarget(self, action: #selector(closeButtonTouched(_:)), for: .touchUpInside)
     gridView.doneButton.addTarget(self, action: #selector(doneButtonTouched(_:)), for: .touchUpInside)
+    
+    gridView.topView.backgroundColor = UIColor.black
+    gridView.topView.tintColor = UIColor.white;
 
     gridView.collectionView.dataSource = self
     gridView.collectionView.delegate = self

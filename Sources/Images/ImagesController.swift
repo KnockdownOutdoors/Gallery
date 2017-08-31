@@ -46,6 +46,7 @@ class ImagesController: UIViewController {
 
     gridView.bottomView.addSubview(stackView)
     gridView.topView.backgroundColor = UIColor.black
+    gridView.topView.tintColor = UIColor.white;
 
     gridView.g_pinEdges()
 
