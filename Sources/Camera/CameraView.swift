@@ -63,37 +63,36 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     insertSubview(rotateOverlayView, belowSubview: rotateButton)
     insertSubview(focusImageView, belowSubview: bottomContainer)
     insertSubview(shutterOverlayView, belowSubview: bottomContainer)
-
-    closeButton.g_pin(on: .top)
+    
+    closeButton.g_pin(on: .top, constant: UIApplication.shared.statusBarFrame.height)
     closeButton.g_pin(on: .left)
     closeButton.g_pin(size: CGSize(width: 44, height: 44))
-
+    
     flashButton.g_pin(on: .centerY, view: closeButton)
     flashButton.g_pin(on: .centerX)
     flashButton.g_pin(size: CGSize(width: 60, height: 44))
-
-    rotateButton.g_pin(on: .top)
+    
+    rotateButton.g_pin(on: .top, constant: UIApplication.shared.statusBarFrame.height)
     rotateButton.g_pin(on: .right)
     rotateButton.g_pin(size: CGSize(width: 44, height: 44))
-
+    
     bottomContainer.g_pinDownward()
     bottomContainer.g_pin(height: 80)
     bottomView.g_pinEdges()
-
+    
     stackView.g_pin(on: .centerY, constant: -4)
     stackView.g_pin(on: .left, constant: 38)
     stackView.g_pin(size: CGSize(width: 56, height: 56))
-
+    
     shutterButton.g_pinCenter()
     shutterButton.g_pin(size: CGSize(width: 60, height: 60))
     
     doneButton.g_pin(on: .centerY)
     doneButton.g_pin(on: .right, constant: -38)
-
+    
     rotateOverlayView.g_pinEdges()
     blurView.g_pinEdges()
-    shutterOverlayView.g_pinEdges()
-  }
+    shutterOverlayView.g_pinEdges()  }
 
   func setupPreviewLayer(_ session: AVCaptureSession) {
     guard previewLayer == nil else { return }

@@ -51,22 +51,22 @@ class GridView: UIView {
     }
     bottomView.g_pinDownward()
     bottomView.g_pin(height: 80)
-
+    
     emptyView.g_pinEdges(view: collectionView)
     collectionView.g_pin(on: .left)
     collectionView.g_pin(on: .right)
     collectionView.g_pin(on: .bottom)
     collectionView.g_pin(on: .top, view: topView, on: .bottom, constant: 1)
-
+    
     bottomBlurView.g_pinEdges()
-
-    closeButton.g_pin(on: .top)
+    
+    closeButton.g_pin(on: .top, constant: UIApplication.shared.statusBarFrame.height)
     closeButton.g_pin(on: .left)
     closeButton.g_pin(size: CGSize(width: 40, height: 40))
-
-    arrowButton.g_pinCenter()
-    arrowButton.g_pin(height: 40)
-
+    
+    arrowButton.g_pin(on: .top, constant: UIApplication.shared.statusBarFrame.height)
+    arrowButton.g_pin(on: .centerX)
+    
     doneButton.g_pin(on: .centerY)
     doneButton.g_pin(on: .right, constant: -38)
   }
