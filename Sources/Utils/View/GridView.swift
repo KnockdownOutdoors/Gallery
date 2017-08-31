@@ -45,6 +45,7 @@ class GridView: UIView {
 
     topView.g_pinUpward()
     topView.g_pin(height: 40)
+    topView.backgroundColor = Config.Grid.TopBar.backgroundColor
     bottomView.g_pinDownward()
     bottomView.g_pin(height: 80)
 

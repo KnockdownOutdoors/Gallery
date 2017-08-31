@@ -55,13 +55,17 @@ public struct Config {
   }
 
   public struct Grid {
+    
+    public struct TopBar {
+        public static var backgroundColor: UIColor = UIColor.black
+    }
 
     public struct CloseButton {
-      public static var tintColor: UIColor = UIColor(red: 109/255, green: 107/255, blue: 132/255, alpha: 1)
+      public static var tintColor: UIColor = UIColor.white
     }
 
     public struct ArrowButton {
-      public static var tintColor: UIColor = UIColor(red: 110/255, green: 117/255, blue: 131/255, alpha: 1)
+      public static var tintColor: UIColor = UIColor.white
     }
 
     public struct FrameView {
