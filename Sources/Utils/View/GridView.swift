@@ -44,7 +44,11 @@ class GridView: UIView {
     }
 
     topView.g_pinUpward()
-    topView.g_pin(height: 40)
+    if(Config.Grid.TopBar.statusBarEnabled) {
+        topView.g_pin(height: 40 + UIApplication.shared.statusBarFrame.height)
+    } else {
+        topView.g_pin(height: 40)
+    }
     bottomView.g_pinDownward()
     bottomView.g_pin(height: 80)
 

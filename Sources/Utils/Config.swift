@@ -57,6 +57,7 @@ public struct Config {
   public struct Grid {
     
     public struct TopBar {
+        public static var statusBarEnabled: Bool = false;
         public static var backgroundColor: UIColor = UIColor.white
     }
 
