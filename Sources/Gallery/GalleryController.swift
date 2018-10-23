@@ -37,7 +37,7 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
         
         setup()
         
-        if Permission.hasNeededPermissions {
+        if Permission.Photos.status == .authorized && Permission.Camera.status == .authorized {
             showMain()
         } else {
             showPermissionView()
