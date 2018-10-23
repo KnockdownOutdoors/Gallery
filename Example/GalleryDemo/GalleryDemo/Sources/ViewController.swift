@@ -3,6 +3,7 @@ import Gallery
 import Lightbox
 import AVFoundation
 import AVKit
+import SVProgressHUD
 
 class ViewController: UIViewController, LightboxControllerDismissalDelegate, GalleryControllerDelegate {
 
@@ -18,7 +19,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
 
     button = UIButton(type: .system)
     button.frame.size = CGSize(width: 200, height: 50)
-    button.setTitle("Open Gallery", for: UIControlState())
+    button.setTitle("Open Gallery", for: UIControl.State())
     button.addTarget(self, action: #selector(buttonTouched(_:)), for: .touchUpInside)
 
     view.addSubview(button)
@@ -30,7 +31,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
     button.center = CGPoint(x: view.bounds.size.width/2, y: view.bounds.size.height/2)
   }
 
-  func buttonTouched(_ button: UIButton) {
+  @objc func buttonTouched(_ button: UIButton) {
     gallery = GalleryController()
     gallery.delegate = self
 
@@ -75,16 +76,25 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
     LightboxConfig.DeleteButton.enabled = true
 
-    let lightboxImages = images.flatMap { $0.uiImage(ofSize: UIScreen.main.bounds.size) }.map({ LightboxImage(image: $0) })
+    SVProgressHUD.show()
+    Image.resolve(images: images, completion: { [weak self] resolvedImages in
+      SVProgressHUD.dismiss()
+      self?.showLightbox(images: resolvedImages.compactMap({ $0 }))
+    })
+  }
 
-    guard lightboxImages.count == images.count else {
+  // MARK: - Helper
+
+  func showLightbox(images: [UIImage]) {
+    guard images.count > 0 else {
       return
     }
 
+    let lightboxImages = images.map({ LightboxImage(image: $0) })
     let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
     lightbox.dismissalDelegate = self
 
-    controller.present(lightbox, animated: true, completion: nil)
+    gallery.present(lightbox, animated: true, completion: nil)
   }
 }
 

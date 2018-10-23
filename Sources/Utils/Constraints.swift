@@ -2,8 +2,8 @@ import UIKit
 
 extension UIView {
 
-  @discardableResult func g_pin(on type1: NSLayoutAttribute,
-             view: UIView? = nil, on type2: NSLayoutAttribute? = nil,
+    @discardableResult func g_pin(on type1: NSLayoutConstraint.Attribute,
+                                  view: UIView? = nil, on type2: NSLayoutConstraint.Attribute? = nil,
              constant: CGFloat = 0,
              priority: Float? = nil) -> NSLayoutConstraint? {
     guard let view = view ?? superview else {
@@ -17,7 +17,7 @@ extension UIView {
                                         toItem: view, attribute: type2,
                                         multiplier: 1, constant: constant)
     if let priority = priority {
-      constraint.priority = priority
+      constraint.priority = UILayoutPriority(priority)
     }
 
     constraint.isActive = true
@@ -72,5 +72,19 @@ extension UIView {
   func g_pinCenter(view: UIView? = nil) {
     g_pin(on: .centerX, view: view)
     g_pin(on: .centerY, view: view)
+  }
+}
+
+// https://github.com/hyperoslo/Sugar/blob/master/Sources/iOS/Constraint.swift
+struct Constraint {
+  static func on(constraints: [NSLayoutConstraint]) {
+    constraints.forEach {
+      ($0.firstItem as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
+      $0.isActive = true
+    }
+  }
+
+  static func on(_ constraints: NSLayoutConstraint ...) {
+    on(constraints: constraints)
   }
 }
